@@ -1,4 +1,3 @@
-// service/service.ts
 import api from '../api/api'; // Importa la configuración base
 
 // Obtener todos los administradores
@@ -49,9 +48,22 @@ const getUserById = async (userId: number) => {
   }
 };
 
+// Obtener todos los usuarios
+const allUsers = async () => {
+  try {
+    const response = await api.get('/user');
+    console.log('Usuarios obtenidos:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error al obtener todos los usuarios:', error);
+    throw error;
+  }
+};
+
 export default {
   alladmin,
   createAdmin,
   createUser,
-  getUserById, // Agrega la nueva función aquí
+  getUserById,
+  allUsers, // Agrega la nueva función aquí
 };
