@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 // Define the UserFormValues interface
 interface UserFormValues {
   nombre: string;
-  edad: number; // Change this back to number
+  edad: string; // Cambia a string para manejar el valor de la fecha
   sexo: string;
   altura: number;
   peso: number;
@@ -46,13 +46,18 @@ export default function RegisterUserPage() {
   const handleSubmit = async (values: UserFormValues) => {
     console.log("Datos enviados:", values);
     try {
-      // Convert edad from string (date) to a timestamp (number)
-      const birthDate = new Date(values.edad); // Get Date object from string
-      const edadTimestamp = birthDate.getTime(); // Get timestamp
+      // Calcular la edad a partir de la fecha de nacimiento
+      const birthDate = new Date(values.edad); // Obtener el objeto Date de la fecha
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+      if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--; // Si la fecha de cumpleaños aún no ha ocurrido este año
+      }
 
       const response = await userService.createUser({
         ...values,
-        edad: edadTimestamp, // Send timestamp instead of Date object
+        edad: age, // Enviar la edad calculada
       });
       console.log("Usuario creado:", response);
       router.push("/dashboardUser");
@@ -69,7 +74,7 @@ export default function RegisterUserPage() {
         <Formik
           initialValues={{
             nombre: "",
-            edad: 0, // Set default value to 0 or adjust as needed
+            edad: "", // Establecer valor por defecto a una cadena vacía
             sexo: "",
             altura: 0,
             peso: 0,
