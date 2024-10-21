@@ -8,10 +8,7 @@ const Sidebar = () => {
         Opciones Doctor
       </h2>
         <ul className="space-y-4 flex flex-col text-lg font-semibold">
-          <Link href="#prueba" className="hover:text-sky-400">
-            Visualizacion de plantillas
-          </Link>
-
+         
           <Link href="#dispositivos" className="hover:text-sky-400">
             Visualizacion de parametros
           </Link>

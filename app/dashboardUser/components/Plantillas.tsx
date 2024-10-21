@@ -8,14 +8,14 @@ export default function Plantillas() {
   const [rightColors, setRightColors] = useState(Array(16).fill('#87ceeb'));
 
   // Función para cambiar el color de un rectángulo en la plantilla izquierda
-  const handleLeftClick = (index) => {
+  const handleLeftClick = (index:number) => {
     const newColors = [...leftColors];
     newColors[index] = newColors[index] === '#000' ? '#4CAF50' : '#000'; // Cambia entre negro y verde
     setLeftColors(newColors);
   };
 
   // Función para cambiar el color de un rectángulo en la plantilla derecha
-  const handleRightClick = (index) => {
+  const handleRightClick = (index:number) => {
     const newColors = [...rightColors];
     newColors[index] = newColors[index] === '#000' ? '#F44336' : '#000'; // Cambia entre negro y rojo
     setRightColors(newColors);

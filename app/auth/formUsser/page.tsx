@@ -7,6 +7,15 @@ import * as Yup from "yup";
 import userService from "../../service/Service";
 import { useRouter } from "next/navigation";
 
+// Define the UserFormValues interface
+interface UserFormValues {
+  nombre: string;
+  edad: number; // Change this back to number
+  sexo: string;
+  altura: number;
+  peso: number;
+}
+
 export default function RegisterUserPage() {
   const validationSchema = Yup.object({
     nombre: Yup.string()
@@ -34,19 +43,23 @@ export default function RegisterUserPage() {
   const router = useRouter();
   const [error, setError] = useState("");
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: UserFormValues) => {
     console.log("Datos enviados:", values);
     try {
-      const response = await userService.createUser(values);
+      // Convert edad from string (date) to a timestamp (number)
+      const birthDate = new Date(values.edad); // Get Date object from string
+      const edadTimestamp = birthDate.getTime(); // Get timestamp
+
+      const response = await userService.createUser({
+        ...values,
+        edad: edadTimestamp, // Send timestamp instead of Date object
+      });
       console.log("Usuario creado:", response);
       router.push("/dashboardUser");
     } catch (error) {
       console.error("Error al crear usuario:", error);
       setError("Hubo un error al crear el usuario. Inténtalo de nuevo.");
-      setError("Hubo un error al crear el usuario. Inténtalo de nuevo.");
     }
-    
-
   };
 
   return (
@@ -56,10 +69,10 @@ export default function RegisterUserPage() {
         <Formik
           initialValues={{
             nombre: "",
-            edad: "",
+            edad: 0, // Set default value to 0 or adjust as needed
             sexo: "",
-            altura: "",
-            peso: "",
+            altura: 0,
+            peso: 0,
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
@@ -131,10 +144,6 @@ export default function RegisterUserPage() {
                 />
                 <ErrorMessage name="peso" component="div" className="text-red-500" />
               </div>
-
-              
-
-              
 
               <button
                 type="submit"
