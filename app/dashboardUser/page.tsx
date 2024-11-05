@@ -2,8 +2,10 @@ import React from 'react';
 import Navbar from '../NavBar';
 import Sidebar from './Sidebar';
 import Plantillas from './components/Plantillas';
+import Clock from './components/Clock';
 
 export default function Page() {
+  const humidity = 65;
   return (
     <div className="bg-gradient-to-l from-indigo-500 to-indigo-950 min-h-screen h-full">
       <Navbar />
@@ -14,8 +16,10 @@ export default function Page() {
         </div>
 
         {/* Plantillas: Centered and responsive */}
-        <div className="flex-grow ml-16 flex justify-center items-center p-4 md:p-8">
+        <div className="flex-grow ml-16 flex justify-center flex-col items-center p-4 md:p-8">
           <Plantillas />
+          <br />
+          <Clock humidity={humidity}/>
         </div>
       </div>
     </div>
