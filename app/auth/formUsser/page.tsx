@@ -57,8 +57,9 @@ export default function RegisterUserPage() {
         ...values,
         edad: age,
       });
+      console.log(response)
       router.push("/dashboardUser");
-    } catch (error) {
+    } catch  {
       setError("Hubo un error al crear el usuario. Inténtalo de nuevo.");
     }
   };
