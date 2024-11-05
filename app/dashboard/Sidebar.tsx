@@ -45,7 +45,7 @@ const Sidebar = () => {
             <span>Límite de temperatura y humedad</span>
           </Link>
 
-          <button className="flex items-center space-x-2 hover:text-sky-400">
+          {/* <button className="flex items-center space-x-2 hover:text-sky-400">
             <FiSave />
             <span>Guardar registro</span>
           </button>
@@ -53,7 +53,7 @@ const Sidebar = () => {
           <button className="flex items-center space-x-2 bg-sky-500 p-2 hover:text-violet-600 rounded-md">
             <FiDownload />
             <span>Descargar Resultados</span>
-          </button>
+          </button> */}
         </ul>
       </div>
       
