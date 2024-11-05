@@ -45,13 +45,13 @@ export default function CreateAdminPage() {
   });
 
   return (
-    <div className="flex justify-center items-center bg-gradient-to-l from-indigo-500 to-indigo-950 max-h-screen h-screen">
+    <div className="flex flex-col justify-center items-center bg-gradient-to-l from-indigo-500 to-indigo-950 min-h-screen p-4 sm:p-0">
       <Navbar />
       <form
         onSubmit={formik.handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm"
+        className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm sm:max-w-md lg:max-w-lg"
       >
-        <h2 className="text-2xl font-bold mb-4">Crear Administrador</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Crear Administrador</h2>
 
         {/* Campo Nombre */}
         <div className="mb-4">

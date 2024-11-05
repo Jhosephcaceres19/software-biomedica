@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 // Define the UserFormValues interface
 interface UserFormValues {
   nombre: string;
-  edad: string; // Cambia a string para manejar el valor de la fecha
+  edad: string;
   sexo: string;
   altura: number;
   peso: number;
@@ -31,8 +31,8 @@ export default function RegisterUserPage() {
     altura: Yup.number()
       .required("La altura es obligatoria")
       .positive("Debe ser un número positivo")
-      .min(0, "Altura mínima es 50 cm")
-      .max(3, "No puede exceder 3mt"),
+      .min(0.5, "Altura mínima es 0.5m")
+      .max(3, "No puede exceder 3m"),
     peso: Yup.number()
       .required("El peso es obligatorio")
       .positive("Debe ser un número positivo")
@@ -44,37 +44,33 @@ export default function RegisterUserPage() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (values: UserFormValues) => {
-    console.log("Datos enviados:", values);
     try {
-      // Calcular la edad a partir de la fecha de nacimiento
-      const birthDate = new Date(values.edad); // Obtener el objeto Date de la fecha
+      const birthDate = new Date(values.edad);
       const today = new Date();
       let age = today.getFullYear() - birthDate.getFullYear();
       const monthDifference = today.getMonth() - birthDate.getMonth();
       if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-        age--; // Si la fecha de cumpleaños aún no ha ocurrido este año
+        age--;
       }
 
       const response = await userService.createUser({
         ...values,
-        edad: age, // Enviar la edad calculada
+        edad: age,
       });
-      console.log("Usuario creado:", response);
       router.push("/dashboardUser");
     } catch (error) {
-      console.error("Error al crear usuario:", error);
       setError("Hubo un error al crear el usuario. Inténtalo de nuevo.");
     }
   };
 
   return (
-    <div className="bg-gradient-to-l from-indigo-500 to-indigo-950 min-h-screen flex flex-col items-center">
+    <div className="bg-gradient-to-l from-indigo-500 to-indigo-950 min-h-screen flex flex-col items-center p-4 md:p-8">
       <Navbar />
-      <div className="w-full max-w-lg mt-20 p-8 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-lg mt-20 p-6 bg-white rounded-lg shadow-lg lg:shadow-xl">
         <Formik
           initialValues={{
             nombre: "",
-            edad: "", // Establecer valor por defecto a una cadena vacía
+            edad: "",
             sexo: "",
             altura: 0,
             peso: 0,
@@ -83,40 +79,40 @@ export default function RegisterUserPage() {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
-            <Form className="space-y-4">
-              <h2 className="text-2xl font-bold text-center mb-4">Registrar Usuario</h2>
+            <Form className="space-y-6">
+              <h2 className="text-2xl font-bold text-center mb-4 text-gray-700">Registrar Usuario</h2>
 
               {error && <div className="text-red-500 text-center">{error}</div>}
 
               <div>
-                <label htmlFor="nombre" className="block font-medium">Nombre</label>
+                <label htmlFor="nombre" className="block font-medium text-gray-700">Nombre</label>
                 <Field
                   id="nombre"
                   name="nombre"
                   type="text"
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 text-gray-800 focus:ring-2 focus:ring-indigo-600"
                 />
                 <ErrorMessage name="nombre" component="div" className="text-red-500" />
               </div>
 
               <div>
-                <label htmlFor="edad" className="block font-medium">Fecha de Nacimiento</label>
+                <label htmlFor="edad" className="block font-medium text-gray-700">Fecha de Nacimiento</label>
                 <Field
                   id="edad"
                   name="edad"
                   type="date"
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 text-gray-800 focus:ring-2 focus:ring-indigo-600"
                 />
                 <ErrorMessage name="edad" component="div" className="text-red-500" />
               </div>
 
               <div>
-                <label htmlFor="sexo" className="block font-medium">Sexo</label>
+                <label htmlFor="sexo" className="block font-medium text-gray-700">Sexo</label>
                 <Field
                   as="select"
                   id="sexo"
                   name="sexo"
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 text-gray-800 focus:ring-2 focus:ring-indigo-600"
                 >
                   <option value="" disabled>
                     Seleccione una opción
@@ -129,23 +125,24 @@ export default function RegisterUserPage() {
               </div>
 
               <div>
-                <label htmlFor="altura" className="block font-medium">Altura (m)</label>
+                <label htmlFor="altura" className="block font-medium text-gray-700">Altura (m)</label>
                 <Field
                   id="altura"
                   name="altura"
                   type="number"
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  step="0.01"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 text-gray-800 focus:ring-2 focus:ring-indigo-600"
                 />
                 <ErrorMessage name="altura" component="div" className="text-red-500" />
               </div>
 
               <div>
-                <label htmlFor="peso" className="block font-medium">Peso (kg)</label>
+                <label htmlFor="peso" className="block font-medium text-gray-700">Peso (kg)</label>
                 <Field
                   id="peso"
                   name="peso"
                   type="number"
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 text-gray-800 focus:ring-2 focus:ring-indigo-600"
                 />
                 <ErrorMessage name="peso" component="div" className="text-red-500" />
               </div>
@@ -153,7 +150,7 @@ export default function RegisterUserPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition"
+                className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-150 ease-in-out"
               >
                 {isSubmitting ? "Registrando..." : "Registrar"}
               </button>

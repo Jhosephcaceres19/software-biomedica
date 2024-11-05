@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Plantillas() {
   // Estado para controlar los colores de los rectángulos de ambas plantillas
@@ -22,9 +23,9 @@ export default function Plantillas() {
   };
 
   return (
-    <div className="flex justify-center gap-12 p-5 mt-20">
+    <div className="flex justify-center gap-12 p-5 mt-20 flex-col lg:flex-row">
       {/* Plantilla Izquierda */}
-      <div className="flex flex-col items-center w-52 h-[540px] bg-blue-100 rounded-lg p-2">
+      <div className="flex flex-col items-center w-52 h-[540px] bg-blue-100  rounded-lg p-2">
         {/* Fila 1 */}
         <div className="flex gap-2 mb-2">
           <div className="w-10 h-20 bg-black rounded-md cursor-pointer transition-colors duration-300"
@@ -159,6 +160,16 @@ export default function Plantillas() {
             style={{ backgroundColor: rightColors[15] }}
             onClick={() => handleRightClick(15)}>16</div>
         </div>
+      </div>
+      <div>
+      <Image
+        src="https://res.cloudinary.com/dcyr5qkhg/image/upload/v1729545435/photo_4925211265622715547_y_1_orbn9e.jpg" // URL de tu imagen
+        alt="Descripción de la imagen"
+        width={410} // Ancho de la imagen en píxeles
+        height={600} // Alto de la imagen en píxeles
+        priority // Opcional: carga la imagen de forma prioritaria
+        className='rounded-md hidden lg:flex'
+      />
       </div>
     </div>
   );
