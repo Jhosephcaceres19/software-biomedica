@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import React, { useState } from "react";
-import { FiMenu, FiX, FiEye, FiClock, FiThermometer, FiSave, FiDownload } from "react-icons/fi";
+import { FiMenu, FiX, FiEye, FiClock, FiThermometer } from "react-icons/fi";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
