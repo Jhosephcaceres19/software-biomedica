@@ -6,6 +6,7 @@ import Clock from './components/Clock';
 
 export default function Page() {
   const humidity = 65;
+  const temperature = 22
   return (
     <div className="bg-gradient-to-l from-indigo-500 to-indigo-950 min-h-screen h-full">
       <Navbar />
@@ -19,7 +20,7 @@ export default function Page() {
         <div className="flex-grow ml-16 flex justify-center flex-col items-center p-4 md:p-8">
           <Plantillas />
           <br />
-          <Clock humidity={humidity}/>
+          <Clock humidity={humidity} temperature={temperature}/>
         </div>
       </div>
     </div>

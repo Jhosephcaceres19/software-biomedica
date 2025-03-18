@@ -81,7 +81,7 @@ export default function RegisterUserPage() {
         >
           {({ isSubmitting }) => (
             <Form className="space-y-6">
-              <h2 className="text-2xl font-bold text-center mb-4 text-gray-700">Registrar Usuario</h2>
+              <h2 className="text-2xl font-bold text-center mb-4 text-gray-700">Registrar Paciente</h2>
 
               {error && <div className="text-red-500 text-center">{error}</div>}
 

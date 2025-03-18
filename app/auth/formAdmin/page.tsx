@@ -51,7 +51,7 @@ export default function CreateAdminPage() {
         onSubmit={formik.handleSubmit}
         className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm sm:max-w-md lg:max-w-lg"
       >
-        <h2 className="text-2xl font-bold mb-4 text-center">Crear Administrador</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Ingresar Doctor</h2>
 
         {/* Campo Nombre */}
         <div className="mb-4">
@@ -132,7 +132,7 @@ export default function CreateAdminPage() {
           }`}
           disabled={formik.isSubmitting}
         >
-          {formik.isSubmitting ? 'Creando...' : 'Crear Admin'}
+          {formik.isSubmitting ? 'Creando...' : 'Ingresar'}
         </button>
       </form>
     </div>
