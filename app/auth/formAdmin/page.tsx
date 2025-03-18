@@ -10,13 +10,13 @@ import { useRouter } from 'next/navigation';
 const validationSchema = Yup.object({
   nombre: Yup.string()
     .min(2, 'El nombre debe tener al menos 2 caracteres')
-    .required('El nombre es obligatorio'),
+    .required('El nombre del doctor es obligatorio'),
   contrasena: Yup.string()
     .min(6, 'La contraseña debe tener al menos 6 caracteres')
     .required('La contraseña es obligatoria'),
   codigo_admin: Yup.string()
     .length(6, 'El código debe tener exactamente 6 caracteres')
-    .required('El código de administrador es obligatorio'),
+    .required('El código del doctor es obligatorio'),
 });
 
 export default function CreateAdminPage() {
@@ -56,7 +56,7 @@ export default function CreateAdminPage() {
         {/* Campo Nombre */}
         <div className="mb-4">
           <label htmlFor="nombre" className="block text-sm font-medium text-gray-700">
-            Nombre
+            Nombre Doctor
           </label>
           <input
             type="text"
@@ -70,7 +70,7 @@ export default function CreateAdminPage() {
                 ? 'border-red-500'
                 : 'border-gray-300'
             }`}
-            placeholder="Ingrese el nombre"
+            placeholder="Ingrese el nombre del doctor"
           />
           {formik.touched.nombre && formik.errors.nombre && (
             <p className="text-red-500 text-sm">{formik.errors.nombre}</p>
@@ -104,7 +104,7 @@ export default function CreateAdminPage() {
         {/* Campo Código de Admin */}
         <div className="mb-4">
           <label htmlFor="codigo_admin" className="block text-sm font-medium text-gray-700">
-            Código de Admin
+            Código del Doctor
           </label>
           <input
             type="text"
@@ -118,7 +118,7 @@ export default function CreateAdminPage() {
                 ? 'border-red-500'
                 : 'border-gray-300'
             }`}
-            placeholder="Ingrese el código de administrador"
+            placeholder="Ingrese el código del doctor"
           />
           {formik.touched.codigo_admin && formik.errors.codigo_admin && (
             <p className="text-red-500 text-sm">{formik.errors.codigo_admin}</p>
